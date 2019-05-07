@@ -3,9 +3,6 @@ const player2 = "O";
 var playTime = player1; //quem começa
 var gameOver = false;
 var images = new Array();
-var sequence = [];
-var actualRound = 0;
-var seqPos = 0;
 
 
 function sleep(ms){
@@ -69,7 +66,7 @@ async function verificarVencedor(){
 	if (vencedor != "") {
 		gameOver = true;
 		await sleep(50);
-		alert(vencedor + " ganhou!");
+		alert("'" + vencedor + "'" + " ganhou!");
 	}
 
 

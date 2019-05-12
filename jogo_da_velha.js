@@ -1,8 +1,8 @@
 const player1 = "X";
 const player2 = "O";
 var gameOver = false;
-var playTime = player1; //quem começa
-var images = new Array();
+var start = player1; //quem começa
+var imagens = new Array();
 
 
 function sleep(ms){
@@ -12,8 +12,8 @@ function sleep(ms){
 
 function preloadImages(){
 	for (i = 0; i < preloadImages.arguments.length; i++) {
-		images[i] = new Image()
-		images[i].src = preloadImages.arguments[i]
+		imagens[i] = new Image()
+		imagens[i].src = preloadImages.arguments[i]
 	}
 }
 
@@ -22,12 +22,12 @@ function atualizaMostrador(){
 	if (gameOver) {
 		return;
 	}
-	if (playTime == player1) {
+	if (start == player1) {
 		var player = document.querySelectorAll("div#mostrador img")[0];
-		player.setAttribute("src", images[0].src);
+		player.setAttribute("src", imagens[0].src);
 	} else{
 		var player = document.querySelectorAll("div#mostrador img")[0];
-		player.setAttribute("src", images[1].src);
+		player.setAttribute("src", imagens[1].src);
 	}
 }
 
@@ -64,7 +64,7 @@ async function verificarVencedor(){
 function inicializarEspacos(){
 	var espacos = document.getElementsByClassName("espaco");
 	for (var i = 0; i < espacos.length; i++) {
-		espacos[i].innerHTML = "<img id='p1' src='"+images[0].src+"' border='0'><img id='p2' src='"+images[1].src+"' border='0'>";
+		espacos[i].innerHTML = "<img id='p1' src='"+imagens[0].src+"' border='0'><img id='p2' src='"+ imagens[1].src + "' border='0'>";
 		espacos[i].getElementsByTagName('img')[0].style.display = "none";
 		espacos[i].getElementsByTagName('img')[1].style.display = "none";
 		espacos[i].addEventListener("click", function(){
@@ -72,16 +72,16 @@ function inicializarEspacos(){
 				return;
 			}
 			if(this.getAttribute("jogada") == ""){
-				if (playTime == player1) {
+				if (start == player1) {
 					this.getElementsByTagName('img')[0].style.display = "inline";
 					//this.innerHTML = "<img src='"+images[0].src+"' border='0'>";
 					this.setAttribute("jogada", player1);
-					playTime = player2;
+					start = player2;
 				}else{
 					this.getElementsByTagName('img')[1].style.display = "inline";
 					//this.innerHTML = "<img src='"+images[1].src+"' border='0'>";
 					this.setAttribute("jogada", player2);
-					playTime = player1;
+					start = player1;
 				}
 				atualizaMostrador();
 				verificarVencedor();

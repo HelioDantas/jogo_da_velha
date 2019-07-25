@@ -21,11 +21,8 @@ function preloadImages() {
 function atualizaMostrador() {
     if (gameOver) {
         return;
-    }
-    if (start === player1) {
-        return alterarVez(0);
-    }
-    return alterarVez(1);
+    };
+    (start === player1) ? alterarVez(0) : alterarVez(1);
 
 }
 
@@ -34,6 +31,7 @@ function alterarVez(play) {
     player.setAttribute("src", imagens[play].src);
 
 }
+
 //pegar espaços do tabuleiro
 function pegarJogadas(campos) {
     let tabuleiro = {};

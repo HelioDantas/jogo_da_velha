@@ -17,19 +17,14 @@ function preloadImages() {
     }
 }
 
-//alterar a vez
+//alterar a imagem da vez
 function atualizaMostrador() {
-    if (gameOver) {
-        return;
-    }
     (start === player1) ? alterarVez(0) : alterarVez(1);
-
 }
 
 function alterarVez(play) {
     let player = document.querySelectorAll("div#mostrador img")[0];
     player.setAttribute("src", imagens[play].src);
-
 }
 
 //pegar espaços do tabuleiro
@@ -73,18 +68,20 @@ function inicializar(espacos) {
     espacos.getElementsByTagName('img')[0].style.display = "none";
     espacos.getElementsByTagName('img')[1].style.display = "none";
     espacos.addEventListener("click", function () {
-        if (gameOver || this.getAttribute("jogada") !== "") {
-            return;
-        }
-        if (start === player1) {
-            altenarPlay(espacos, player2, player1, 0);
-        } else {
-            altenarPlay(espacos, player1, player2, 1);
-        }
-        atualizarAndVerificarVencedor()
+        endGame(espacos, this);
     });
 }
 
+const endGame = (espacos, eventoClick) => {
+    if (gameOver || eventoClick.getAttribute("jogada") !== "") {
+        return;
+    }
+    continueJogo(espacos);
+};
+const continueJogo = (espacos) => {
+    (start === player1) ? altenarPlay(espacos, player2, player1, 0) : altenarPlay(espacos, player1, player2, 1);
+    atualizarAndVerificarVencedor()
+};
 const atualizarAndVerificarVencedor = () => {
     atualizaMostrador();
     verificarVencedor();
@@ -96,10 +93,10 @@ const atualizarMostradorAndEspacos = () => {
     inicializarEspacos();
 };
 
-function altenarPlay(espacos, player, playerDaVez, index) {
+const altenarPlay = (espacos, player, playerDaVez, index) => {
     espacos.getElementsByTagName('img')[index].style.display = "inline";
     espacos.setAttribute("jogada", playerDaVez);
     start = player;
-}
+};
 
 atualizarMostradorAndEspacos();

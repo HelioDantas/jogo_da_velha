@@ -81,12 +81,17 @@ function inicializar(espacos) {
         } else {
             altenarPlay(espacos, player1, player2, 1);
         }
-        atualizaMostrador();
-        verificarVencedor();
+        atualizarAndVerificarVencedor()
     });
 }
 
+const atualizarAndVerificarVencedor = () => {
+    atualizaMostrador();
+    verificarVencedor();
+};
+
 const atualizarMostradorAndEspacos = () => {
+    preloadImages("asset/img/x.png", "asset/img/o.png");
     atualizaMostrador();
     inicializarEspacos();
 };
@@ -97,5 +102,4 @@ function altenarPlay(espacos, player, playerDaVez, index) {
     start = player;
 }
 
-preloadImages("asset/img/x.png", "asset/img/o.png");
 atualizarMostradorAndEspacos();

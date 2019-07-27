@@ -21,7 +21,7 @@ function preloadImages() {
 function atualizaMostrador() {
     if (gameOver) {
         return;
-    };
+    }
     (start === player1) ? alterarVez(0) : alterarVez(1);
 
 }
@@ -86,6 +86,11 @@ function inicializar(espacos) {
     });
 }
 
+const atualizarMostradorAndEspacos = () => {
+    atualizaMostrador();
+    inicializarEspacos();
+};
+
 function altenarPlay(espacos, player, playerDaVez, index) {
     espacos.getElementsByTagName('img')[index].style.display = "inline";
     espacos.setAttribute("jogada", playerDaVez);
@@ -93,5 +98,4 @@ function altenarPlay(espacos, player, playerDaVez, index) {
 }
 
 preloadImages("asset/img/x.png", "asset/img/o.png");
-atualizaMostrador();
-inicializarEspacos();
+atualizarMostradorAndEspacos();
